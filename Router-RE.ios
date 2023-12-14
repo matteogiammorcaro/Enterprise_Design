@@ -1,0 +1,175 @@
+Current configuration : 2872 bytes
+!
+! Last configuration change at 14:49:35 UTC Thu Dec 14 2023
+!
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Router-RE
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!         
+!
+!
+!
+!
+!
+ip dhcp excluded-address 10.2.100.1 10.2.100.10
+ip dhcp excluded-address 10.2.100.255
+ip dhcp excluded-address 10.2.170.1 10.2.170.10
+ip dhcp excluded-address 10.2.170.255
+!
+ip dhcp pool REDHCP
+ network 10.2.100.0 255.255.255.192
+ default-router 10.2.100.1 
+ dns-server 1.1.1.1 
+ domain-name supercorp.local
+!
+ip dhcp pool GuestDHCP
+ network 10.2.170.0 255.255.255.0
+ default-router 10.2.170.1 
+ dns-server 1.1.1.1 
+ domain-name supercorp.local
+!
+!         
+!
+ip domain name supercorp.local
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+cts logging verbose
+!
+!
+license udi pid CISCO2901/K9 sn FCZ193570HK
+license boot module c2900 technology-package securityk9
+!
+!
+username admin password 0 paswoord123
+!
+redundancy
+!
+!
+!
+!
+!         
+ip ssh version 2
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1.100
+ encapsulation dot1Q 100
+ ip address 10.2.100.1 255.255.255.192
+!
+interface GigabitEthernet0/1.120
+ encapsulation dot1Q 120
+ ip address 10.2.120.1 255.255.255.0
+!
+interface GigabitEthernet0/1.130
+ encapsulation dot1Q 130
+ ip address 10.2.130.1 255.255.255.0
+!
+interface GigabitEthernet0/1.140
+ encapsulation dot1Q 140
+ ip address 10.2.140.1 255.255.255.0
+!
+interface GigabitEthernet0/1.150
+ encapsulation dot1Q 150
+ ip address 10.2.150.1 255.255.255.0
+!
+interface GigabitEthernet0/1.160
+ encapsulation dot1Q 160
+ ip address 10.2.160.1 255.255.255.0
+!
+interface GigabitEthernet0/1.170
+ encapsulation dot1Q 170
+ ip address 10.2.170.1 255.255.255.0
+!
+interface GigabitEthernet0/1.180
+ encapsulation dot1Q 180
+ ip address 10.2.180.1 255.255.255.0
+!
+interface Serial0/0/0
+ no ip address
+ shutdown
+ clock rate 2000000
+!
+interface Serial0/0/1
+ ip address 192.168.1.2 255.255.255.224
+ clock rate 2000000
+!
+router ospf 1
+ network 10.2.100.0 0.0.0.127 area 0
+ network 10.2.120.0 0.0.0.255 area 0
+ network 10.2.130.0 0.0.0.255 area 0
+ network 10.2.140.0 0.0.0.255 area 0
+ network 10.2.150.0 0.0.0.255 area 0
+ network 10.2.160.0 0.0.0.255 area 0
+ network 10.2.170.0 0.0.0.255 area 0
+ network 192.168.1.0 0.0.0.3 area 0
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+!
+end

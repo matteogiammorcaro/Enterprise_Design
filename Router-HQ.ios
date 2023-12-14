@@ -1,0 +1,594 @@
+Current configuration : 6073 bytes
+!
+! Last configuration change at 11:32:50 UTC Sun Aug 29 2021
+!
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Router-HQ
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!         
+!
+!
+!
+!
+!
+ip dhcp excluded-address 10.1.10.1 10.1.10.10
+ip dhcp excluded-address 10.1.10.255
+ip dhcp excluded-address 10.1.11.1 10.1.11.10
+ip dhcp excluded-address 10.1.11.255
+ip dhcp excluded-address 10.1.12.1 10.1.12.10
+ip dhcp excluded-address 10.1.12.255
+ip dhcp excluded-address 10.1.13.1 10.1.13.10
+ip dhcp excluded-address 10.1.13.255
+ip dhcp excluded-address 10.1.14.1 10.1.14.10
+ip dhcp excluded-address 10.1.14.255
+ip dhcp excluded-address 10.1.15.1 10.1.15.10
+ip dhcp excluded-address 10.1.15.255
+ip dhcp excluded-address 10.1.16.1 10.1.16.10
+ip dhcp excluded-address 10.1.16.255
+ip dhcp excluded-address 10.1.17.1 10.1.17.10
+ip dhcp excluded-address 10.1.17.255
+ip dhcp excluded-address 10.1.18.1 10.1.18.10
+ip dhcp excluded-address 10.1.18.255
+!
+ip dhcp pool SalesDHCP
+ network 10.1.10.0 255.255.255.128
+ default-router 10.1.10.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool AccountingDHCP
+ network 10.1.11.0 255.255.255.192
+ default-router 10.1.11.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool FaciliteitenDHCP
+ network 10.1.12.0 255.255.255.240
+ default-router 10.1.12.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool ITDHCP
+ network 10.1.13.0 255.255.255.192
+ default-router 10.1.13.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool MarketingDHCP
+ network 10.1.14.0 255.255.255.192
+ default-router 10.1.14.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool SupportDHCP
+ network 10.1.15.0 255.255.255.0
+ default-router 10.1.15.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool SuccesDHCP
+ network 10.1.16.0 255.255.255.240
+ default-router 10.1.16.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool GuestDHCP
+ network 10.1.17.0 255.255.255.0
+ default-router 10.1.17.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool ManagementDHCP
+ network 10.1.18.0 255.255.255.0
+ default-router 10.1.18.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+!
+!
+ip domain name supercorp.local
+ip cef
+no ipv6 cef
+multilink bundle-name authenticated
+!
+!
+cts logging verbose
+!
+!
+license udi pid CISCO2901/K9 sn FCZ18519558
+!
+!         
+username admin password 0 paswoord123
+!
+redundancy
+!
+!
+ip ssh version 2
+!
+!
+!
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ ip address 193.190.120.55 255.255.255.224
+ ip nat outside
+ ip virtual-reassembly in
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0.10
+ shutdown 
+!
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1.10
+ encapsulation dot1Q 10
+ ip address 10.1.10.1 255.255.255.128
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.11
+ encapsulation dot1Q 11
+ ip address 10.1.11.1 255.255.255.192
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.12
+ encapsulation dot1Q 12
+ ip address 10.1.12.1 255.255.255.240
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.13
+ encapsulation dot1Q 13
+ ip address 10.1.13.1 255.255.255.192
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.14
+ encapsulation dot1Q 14
+ ip address 10.1.14.1 255.255.255.192
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.15
+ encapsulation dot1Q 15
+ ip address 10.1.15.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.16
+ encapsulation dot1Q 16
+ ip address 10.1.16.1 255.255.255.240
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.17
+ encapsulation dot1Q 17
+ ip address 10.1.17.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.18
+ encapsulation dot1Q 18
+ ip address 10.1.18.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.20
+ encapsulation dot1Q 20
+ ip address 10.1.20.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.30
+ encapsulation dot1Q 30
+ ip address 10.1.30.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.40
+ encapsulation dot1Q 40
+ ip address 10.1.40.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.50
+ encapsulation dot1Q 50
+ ip address 10.1.50.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.60
+ encapsulation dot1Q 60
+ ip address 10.1.60.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface Serial0/0/0
+ ip address 192.168.0.1 255.255.255.254
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface Serial0/0/1
+ ip address 192.168.1.1 255.255.255.254
+ ip nat inside
+ ip virtual-reassembly in
+!
+router ospf 1
+ network 10.1.10.0 0.0.0.127 area 0
+ network 10.1.11.0 0.0.0.63 area 0
+ network 10.1.12.0 0.0.0.15 area 0
+ network 10.1.13.0 0.0.0.63 area 0
+ network 10.1.14.0 0.0.0.63 area 0
+ network 10.1.15.0 0.0.0.255 area 0
+ network 10.1.16.0 0.0.0.15 area 0
+ network 10.1.17.0 0.0.0.255 area 0
+ network 10.1.18.0 0.0.0.255 area 0
+ network 10.1.20.0 0.0.0.255 area 0
+ network 10.1.30.0 0.0.0.255 area 0
+ network 10.1.40.0 0.0.0.255 area 0
+ network 10.1.50.0 0.0.0.255 area 0
+ network 10.1.60.0 0.0.0.255 area 0
+!
+ip default-gateway 193.190.120.62
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip nat inside source list 100 interface GigabitEthernet0/0 overload
+ip route 0.0.0.0 0.0.0.0 193.190.120.62
+!
+!
+!
+access-list 100 permit ip 10.0.0.0 0.255.255.255 any
+access-list 100 permit ip 192.168.0.0 0.0.255.255 any
+!
+control-plane
+!
+!
+!
+line con 0
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+!
+end
+
+Router-HQ#conf t          
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router-HQ(config)#int s0/0/0
+Router-HQ(config-if)#ip add
+Router-HQ(config-if)#ip address 192.168.0.1 255.255.255.252
+Router-HQ(config-if)#no shut
+Router-HQ(config-if)#exit
+Router-HQ(config)#int s0/0/1                            
+Router-HQ(config-if)#ip address 192.168.1.1 255.255.255.252
+Router-HQ(config-if)#exit
+Router-HQ(config)#exit
+Router-HQ#sh r
+*Aug 29 11:36:40.979: %SYS-5-CONFIG_I: Configured from console by consolerun
+              ^
+% Invalid input detected at '^' marker.
+
+Router-HQ#sh run
+Building configuration...
+
+Current configuration : 6073 bytes
+!
+! Last configuration change at 11:36:40 UTC Sun Aug 29 2021
+!
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Router-HQ
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!         
+!
+!
+!
+!
+!
+ip dhcp excluded-address 10.1.10.1 10.1.10.10
+ip dhcp excluded-address 10.1.10.255
+ip dhcp excluded-address 10.1.11.1 10.1.11.10
+ip dhcp excluded-address 10.1.11.255
+ip dhcp excluded-address 10.1.12.1 10.1.12.10
+ip dhcp excluded-address 10.1.12.255
+ip dhcp excluded-address 10.1.13.1 10.1.13.10
+ip dhcp excluded-address 10.1.13.255
+ip dhcp excluded-address 10.1.14.1 10.1.14.10
+ip dhcp excluded-address 10.1.14.255
+ip dhcp excluded-address 10.1.15.1 10.1.15.10
+ip dhcp excluded-address 10.1.15.255
+ip dhcp excluded-address 10.1.16.1 10.1.16.10
+ip dhcp excluded-address 10.1.16.255
+ip dhcp excluded-address 10.1.17.1 10.1.17.10
+ip dhcp excluded-address 10.1.17.255
+ip dhcp excluded-address 10.1.18.1 10.1.18.10
+ip dhcp excluded-address 10.1.18.255
+!
+ip dhcp pool SalesDHCP
+ network 10.1.10.0 255.255.255.128
+ default-router 10.1.10.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool AccountingDHCP
+ network 10.1.11.0 255.255.255.192
+ default-router 10.1.11.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool FaciliteitenDHCP
+ network 10.1.12.0 255.255.255.240
+ default-router 10.1.12.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool ITDHCP
+ network 10.1.13.0 255.255.255.192
+ default-router 10.1.13.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool MarketingDHCP
+ network 10.1.14.0 255.255.255.192
+ default-router 10.1.14.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool SupportDHCP
+ network 10.1.15.0 255.255.255.0
+ default-router 10.1.15.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool SuccesDHCP
+ network 10.1.16.0 255.255.255.240
+ default-router 10.1.16.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool GuestDHCP
+ network 10.1.17.0 255.255.255.0
+ default-router 10.1.17.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+ip dhcp pool ManagementDHCP
+ network 10.1.18.0 255.255.255.0
+ default-router 10.1.18.1 
+ domain-name supercorp.local
+ dns-server 1.1.1.1 
+!
+!
+!
+ip domain name supercorp.local
+ip cef
+no ipv6 cef
+multilink bundle-name authenticated
+!
+!
+cts logging verbose
+!
+!
+license udi pid CISCO2901/K9 sn FCZ18519558
+!
+!         
+username admin password 0 paswoord123
+!
+redundancy
+!
+!
+ip ssh version 2
+!
+!
+!
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ ip address 193.190.120.55 255.255.255.224
+ ip nat outside
+ ip virtual-reassembly in
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0.10
+ shutdown 
+!
+interface GigabitEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1.10
+ encapsulation dot1Q 10
+ ip address 10.1.10.1 255.255.255.128
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.11
+ encapsulation dot1Q 11
+ ip address 10.1.11.1 255.255.255.192
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.12
+ encapsulation dot1Q 12
+ ip address 10.1.12.1 255.255.255.240
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.13
+ encapsulation dot1Q 13
+ ip address 10.1.13.1 255.255.255.192
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.14
+ encapsulation dot1Q 14
+ ip address 10.1.14.1 255.255.255.192
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.15
+ encapsulation dot1Q 15
+ ip address 10.1.15.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.16
+ encapsulation dot1Q 16
+ ip address 10.1.16.1 255.255.255.240
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.17
+ encapsulation dot1Q 17
+ ip address 10.1.17.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.18
+ encapsulation dot1Q 18
+ ip address 10.1.18.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.20
+ encapsulation dot1Q 20
+ ip address 10.1.20.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.30
+ encapsulation dot1Q 30
+ ip address 10.1.30.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.40
+ encapsulation dot1Q 40
+ ip address 10.1.40.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.50
+ encapsulation dot1Q 50
+ ip address 10.1.50.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface GigabitEthernet0/1.60
+ encapsulation dot1Q 60
+ ip address 10.1.60.1 255.255.255.0
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface Serial0/0/0
+ ip address 192.168.0.1 255.255.255.252
+ ip nat inside
+ ip virtual-reassembly in
+!
+interface Serial0/0/1
+ ip address 192.168.1.1 255.255.255.252
+ ip nat inside
+ ip virtual-reassembly in
+!
+router ospf 1
+ network 10.1.10.0 0.0.0.127 area 0
+ network 10.1.11.0 0.0.0.63 area 0
+ network 10.1.12.0 0.0.0.15 area 0
+ network 10.1.13.0 0.0.0.63 area 0
+ network 10.1.14.0 0.0.0.63 area 0
+ network 10.1.15.0 0.0.0.255 area 0
+ network 10.1.16.0 0.0.0.15 area 0
+ network 10.1.17.0 0.0.0.255 area 0
+ network 10.1.18.0 0.0.0.255 area 0
+ network 10.1.20.0 0.0.0.255 area 0
+ network 10.1.30.0 0.0.0.255 area 0
+ network 10.1.40.0 0.0.0.255 area 0
+ network 10.1.50.0 0.0.0.255 area 0
+ network 10.1.60.0 0.0.0.255 area 0
+!
+ip default-gateway 193.190.120.62
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip nat inside source list 100 interface GigabitEthernet0/0 overload
+ip route 0.0.0.0 0.0.0.0 193.190.120.62
+!
+!
+!
+access-list 100 permit ip 10.0.0.0 0.255.255.255 any
+access-list 100 permit ip 192.168.0.0 0.0.255.255 any
+!
+control-plane
+!
+!
+!
+line con 0
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+!
+scheduler allocate 20000 1000
+!
+end

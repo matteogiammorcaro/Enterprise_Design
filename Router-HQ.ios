@@ -251,6 +251,8 @@ router ospf 1
  network 10.1.40.0 0.0.0.255 area 0
  network 10.1.50.0 0.0.0.255 area 0
  network 10.1.60.0 0.0.0.255 area 0
+ network 192.168.1.0 0.0.0.3 area 0
+ network 192.168.0.0 0.0.0.3 area 0
 !
 ip default-gateway 193.190.120.62
 ip forward-protocol nd

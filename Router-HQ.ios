@@ -227,12 +227,12 @@ interface GigabitEthernet0/1.60
  ip virtual-reassembly in
 !
 interface Serial0/0/0
- ip address 192.168.0.1 255.255.255.254
+ ip address 192.168.0.1 255.255.255.252
  ip nat inside
  ip virtual-reassembly in
 !
 interface Serial0/0/1
- ip address 192.168.1.1 255.255.255.254
+ ip address 192.168.1.1 255.255.255.252
  ip nat inside
  ip virtual-reassembly in
 !

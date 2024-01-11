@@ -1,21 +1,25 @@
-Current configuration : 1929 bytes
 !
-! Last configuration change at 16:17:30 UTC Thu Dec 14 2023
+! Last configuration change at 00:03:51 UTC Mon Mar 1 1993
 !
-version 15.4
+version 15.2
+no service pad
 service timestamps debug datetime msec
 service timestamps log datetime msec
 no service password-encryption
-service call-home
 !
-hostname R-Datacenter
+hostname Switch
 !
 boot-start-marker
 boot-end-marker
 !
 !
-!
 no aaa new-model
+system mtu routing 1500
+!
+!
+!
+!
+!         
 !
 !
 !
@@ -25,111 +29,78 @@ no aaa new-model
 !
 !
 !
+spanning-tree mode rapid-pvst
+spanning-tree extend system-id
 !
-!
-!
-!
-!
-ip cef
-login on-success log
-no ipv6 cef
-multilink bundle-name authenticated
-!
-!
-!
-!
-license udi pid CISCO2901/K9 sn FCZ18519554
-!
-!
-!
-redundancy
+vlan internal allocation policy ascending
 !
 !
 !
 !
 !
 !
-interface Loopback1
- no ip address
+interface FastEthernet0/1
 !
-interface Loopback2
- no ip address
+interface FastEthernet0/2
+!         
+interface FastEthernet0/3
 !
-interface Embedded-Service-Engine0/0
- no ip address
- shutdown
+interface FastEthernet0/4
 !
-interface GigabitEthernet0/0
- no ip address
- shutdown
- duplex auto
- speed auto
+interface FastEthernet0/5
+!
+interface FastEthernet0/6
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
 !
 interface GigabitEthernet0/1
- no ip address
- duplex auto
- speed auto
+!         
+interface GigabitEthernet0/2
 !
-interface GigabitEthernet0/1.200
- encapsulation dot1Q 200
- ip address 10.3.200.1 255.255.255.0
-!
-interface GigabitEthernet0/1.230
- encapsulation dot1Q 230
- ip address 10.3.30.1 255.255.255.0
-!
-interface GigabitEthernet0/1.240
- encapsulation dot1Q 240
- ip address 10.3.40.1 255.255.255.0
-!
-interface GigabitEthernet0/1.250
- encapsulation dot1Q 250
- ip address 10.3.50.1 255.255.255.0
-!
-interface Serial0/0/0
- ip address 192.168.0.2 255.255.255.252
- clock rate 2000000
-!
-interface Serial0/0/1
+interface Vlan1
  no ip address
  shutdown
- clock rate 2000000
-!
-router ospf 1
- network 10.3.30.0 0.0.0.255 area 0
- network 10.3.40.0 0.0.0.255 area 0
- network 10.3.50.0 0.0.0.255 area 0
- network 10.3.200.0 0.0.0.255 area 0
- network 192.168.0.0 0.0.0.3 area 0
-!
-ip default-gateway 192.168.0.1
-ip forward-protocol nd
 !
 ip http server
-ip http authentication local
 ip http secure-server
-!
-ip route 0.0.0.0 0.0.0.0 192.168.0.1
-!
-!
-!
-!
-control-plane
 !
 !
 !
 line con 0
-line aux 0
-line 2
- no activation-character
- no exec
- transport preferred none
- transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
- stopbits 1
-line vty 0 4
- login
- transport input none
-!
-scheduler allocate 20000 1000
+line vty 5 15
 !
 end

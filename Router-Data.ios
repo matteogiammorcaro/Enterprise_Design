@@ -1,6 +1,6 @@
-Current configuration : 1732 bytes
+Current configuration : 2223 bytes
 !
-! Last configuration change at 15:24:42 UTC Thu Dec 14 2023
+! Last configuration change at 12:57:47 UTC Thu Jan 11 2024
 !
 version 15.4
 service timestamps debug datetime msec
@@ -20,7 +20,7 @@ no aaa new-model
 !
 !
 !
-!
+!         
 !
 !
 !
@@ -36,6 +36,7 @@ no ipv6 cef
 multilink bundle-name authenticated
 !
 !
+cts logging verbose
 !
 !
 license udi pid CISCO2901/K9 sn FCZ18519554
@@ -95,9 +96,23 @@ interface Serial0/0/1
  shutdown
  clock rate 2000000
 !
+router ospf 1
+ passive-interface GigabitEthernet0/0
+ passive-interface GigabitEthernet0/1
+ passive-interface GigabitEthernet0/1.200
+ passive-interface GigabitEthernet0/1.230
+ passive-interface GigabitEthernet0/1.240
+ passive-interface GigabitEthernet0/1.250
+ passive-interface Serial0/0/1
+ network 10.3.30.0 0.0.0.255 area 0
+ network 10.3.40.0 0.0.0.255 area 0
+ network 10.3.50.0 0.0.0.255 area 0
+ network 10.3.200.0 0.0.0.255 area 0
+ network 192.168.0.0 0.0.0.3 area 0
+!
 ip default-gateway 192.168.0.1
 ip forward-protocol nd
-!
+!         
 ip http server
 ip http authentication local
 ip http secure-server
@@ -120,7 +135,7 @@ line 2
  transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
  stopbits 1
 line vty 0 4
- login
+ login    
  transport input none
 !
 scheduler allocate 20000 1000

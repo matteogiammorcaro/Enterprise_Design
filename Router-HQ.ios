@@ -1,6 +1,6 @@
-Current configuration : 6073 bytes
+Current configuration : 6777 bytes
 !
-! Last configuration change at 11:32:50 UTC Sun Aug 29 2021
+! Last configuration change at 08:57:53 UTC Sun Sep 26 2021
 !
 version 15.4
 service timestamps debug datetime msec
@@ -235,8 +235,24 @@ interface Serial0/0/1
  ip address 192.168.1.1 255.255.255.252
  ip nat inside
  ip virtual-reassembly in
+ clock rate 2000000
 !
 router ospf 1
+ passive-interface GigabitEthernet0/1
+ passive-interface GigabitEthernet0/1.10
+ passive-interface GigabitEthernet0/1.11
+ passive-interface GigabitEthernet0/1.12
+ passive-interface GigabitEthernet0/1.13
+ passive-interface GigabitEthernet0/1.14
+ passive-interface GigabitEthernet0/1.15
+ passive-interface GigabitEthernet0/1.16
+ passive-interface GigabitEthernet0/1.17
+ passive-interface GigabitEthernet0/1.18
+ passive-interface GigabitEthernet0/1.20
+ passive-interface GigabitEthernet0/1.30
+ passive-interface GigabitEthernet0/1.40
+ passive-interface GigabitEthernet0/1.50
+ passive-interface GigabitEthernet0/1.60
  network 10.1.10.0 0.0.0.127 area 0
  network 10.1.11.0 0.0.0.63 area 0
  network 10.1.12.0 0.0.0.15 area 0
@@ -251,8 +267,8 @@ router ospf 1
  network 10.1.40.0 0.0.0.255 area 0
  network 10.1.50.0 0.0.0.255 area 0
  network 10.1.60.0 0.0.0.255 area 0
- network 192.168.1.0 0.0.0.3 area 0
  network 192.168.0.0 0.0.0.3 area 0
+ network 192.168.1.0 0.0.0.3 area 0
 !
 ip default-gateway 193.190.120.62
 ip forward-protocol nd

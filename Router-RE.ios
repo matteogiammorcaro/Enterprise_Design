@@ -1,6 +1,6 @@
-Current configuration : 2872 bytes
+Current configuration : 3342 bytes
 !
-! Last configuration change at 14:49:35 UTC Thu Dec 14 2023
+! Last configuration change at 11:38:37 UTC Thu Jan 11 2024
 !
 version 15.4
 service timestamps debug datetime msec
@@ -90,7 +90,6 @@ interface GigabitEthernet0/0
 !
 interface GigabitEthernet0/1
  no ip address
- shutdown
  duplex auto
  speed auto
 !
@@ -113,7 +112,7 @@ interface GigabitEthernet0/1.140
 interface GigabitEthernet0/1.150
  encapsulation dot1Q 150
  ip address 10.2.150.1 255.255.255.0
-!
+!         
 interface GigabitEthernet0/1.160
  encapsulation dot1Q 160
  ip address 10.2.160.1 255.255.255.0
@@ -132,10 +131,21 @@ interface Serial0/0/0
  clock rate 2000000
 !
 interface Serial0/0/1
- ip address 192.168.1.2 255.255.255.224
+ ip address 192.168.1.2 255.255.255.252
  clock rate 2000000
 !
 router ospf 1
+ passive-interface GigabitEthernet0/0
+ passive-interface GigabitEthernet0/1
+ passive-interface GigabitEthernet0/1.100
+ passive-interface GigabitEthernet0/1.120
+ passive-interface GigabitEthernet0/1.130
+ passive-interface GigabitEthernet0/1.140
+ passive-interface GigabitEthernet0/1.150
+ passive-interface GigabitEthernet0/1.160
+ passive-interface GigabitEthernet0/1.170
+ passive-interface GigabitEthernet0/1.180
+ passive-interface Serial0/0/0
  network 10.2.100.0 0.0.0.127 area 0
  network 10.2.120.0 0.0.0.255 area 0
  network 10.2.130.0 0.0.0.255 area 0
@@ -150,6 +160,7 @@ ip forward-protocol nd
 no ip http server
 no ip http secure-server
 !
+ip route 0.0.0.0 0.0.0.0 192.168.1.1
 !
 !
 !

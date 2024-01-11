@@ -1,6 +1,6 @@
-Current configuration : 2223 bytes
+Current configuration : 2314 bytes
 !
-! Last configuration change at 12:57:47 UTC Thu Jan 11 2024
+! Last configuration change at 15:51:55 UTC Thu Jan 11 2024
 !
 version 15.4
 service timestamps debug datetime msec
@@ -30,6 +30,7 @@ no aaa new-model
 !
 !
 !
+ip domain name supercorp.local
 ip cef
 login on-success log
 no ipv6 cef
@@ -42,10 +43,12 @@ cts logging verbose
 license udi pid CISCO2901/K9 sn FCZ18519554
 !
 !
+username cisco password 0 paswoord123
 !
 redundancy
 !
 !
+ip ssh version 2
 !
 !
 !
@@ -86,7 +89,7 @@ interface GigabitEthernet0/1.240
 interface GigabitEthernet0/1.250
  encapsulation dot1Q 250
  ip address 10.3.50.1 255.255.255.0
-!
+!         
 interface Serial0/0/0
  ip address 192.168.0.2 255.255.255.252
  clock rate 2000000
@@ -109,10 +112,10 @@ router ospf 1
  network 10.3.50.0 0.0.0.255 area 0
  network 10.3.200.0 0.0.0.255 area 0
  network 192.168.0.0 0.0.0.3 area 0
-!
+!         
 ip default-gateway 192.168.0.1
 ip forward-protocol nd
-!         
+!
 ip http server
 ip http authentication local
 ip http secure-server
@@ -135,8 +138,8 @@ line 2
  transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
  stopbits 1
 line vty 0 4
- login    
- transport input none
+ login local
+ transport input ssh
 !
 scheduler allocate 20000 1000
 !

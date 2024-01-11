@@ -1,6 +1,6 @@
-Current configuration : 1875 bytes
+Current configuration : 4032 bytes
 !
-! Last configuration change at 00:35:58 UTC Mon Mar 1 1993
+! Last configuration change at 00:25:11 UTC Mon Mar 1 1993
 !
 version 15.2
 no service pad
@@ -14,6 +14,7 @@ boot-start-marker
 boot-end-marker
 !
 !
+username cisco password 0 paswoord123
 no aaa new-model
 system mtu routing 1500
 !
@@ -21,103 +22,168 @@ system mtu routing 1500
 !
 !
 !         
-!         
 !
 !
 !
 !
 !
 !
+ip dhcp snooping
+ip dhcp snooping vlan 10-18,20-60
+ip domain-name pingunix.local
+!
+crypto pki trustpoint TP-self-signed-3892401280
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3892401280
+ revocation-check none
+ rsakeypair TP-self-signed-3892401280
 !
 !
-spanning-tree mode rapid-pvst
-spanning-tree extend system-id
+crypto pki certificate chain TP-self-signed-3892401280
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 33383932 34303132 3830301E 170D3933 30333031 30303031 
+  34395A17 0D333030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D33 38393234 
+  30313238 3030819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100D757 A71FB1C5 1AD38FDC F76245A7 F0446811 F1212A5B F379F46F 624E38A2 
+  2B968C13 86EE2652 9E0CCA7D 957ED4C2 82404DD0 48632C25 7AD37543 FAD1E55A 
+  C8DCC1FA E0C08C71 9D793028 2D368571 8887B324 C1586EDB 04F7F993 30E46C5C 
+  3D25FB37 5DBA8982 E8E361FB 78FD3E41 2BC2C88C A11978BD 72E3AFEE 352C4881 
+  55530203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 147CB3A2 8FCC5D45 892DFD5A CF275304 47B0E295 2E301D06 
+  03551D0E 04160414 7CB3A28F CC5D4589 2DFD5ACF 27530447 B0E2952E 300D0609 
+  2A864886 F70D0101 05050003 8181001A A1A0D591 F47D8AB5 FDC1A355 B6A92684 
+  71A80669 16D929CD 48918511 47710439 E785959F 03A5AB47 2213DF29 CF633102 
+  428390F9 0080FF64 58D04992 C05D7FED 543E12A1 4E8C8EBF D86F9E0D A1CB5E21 
+  6A49B7F0 9B1737F6 8FF4BE6A B4218140 AD4759E6 784AAD52 F386F365 2271F3CA 
+  14BAE5EA D4A206F2 88824473 B28EB4
+        quit
+!
 !
 vlan internal allocation policy ascending
 !
-!
+!         
 !
 !
 !
 !
 interface FastEthernet0/1
  switchport access vlan 10
+ switchport port-security mac-address sticky
 !
 interface FastEthernet0/2
  switchport access vlan 11
+ switchport port-security mac-address sticky
 !
 interface FastEthernet0/3
  switchport access vlan 12
+ switchport port-security mac-address sticky
 !
 interface FastEthernet0/4
  switchport access vlan 13
+ switchport port-security mac-address sticky
 !
 interface FastEthernet0/5
  switchport access vlan 14
+ switchport port-security mac-address sticky
 !
 interface FastEthernet0/6
  switchport access vlan 15
+ switchport port-security mac-address sticky
 !
 interface FastEthernet0/7
  switchport access vlan 16
+ switchport port-security mac-address sticky
 !
 interface FastEthernet0/8
  switchport access vlan 17
+ switchport port-security mac-address sticky
 !
 interface FastEthernet0/9
  switchport access vlan 18
-!         
+ switchport port-security mac-address sticky
+!
 interface FastEthernet0/10
  switchport access vlan 20
+ switchport port-security mac-address sticky
 !
 interface FastEthernet0/11
  switchport access vlan 30
+ switchport port-security mac-address sticky
 !
 interface FastEthernet0/12
  switchport access vlan 40
+ switchport port-security mac-address sticky
 !
 interface FastEthernet0/13
  switchport access vlan 50
+ switchport port-security mac-address sticky
 !
 interface FastEthernet0/14
  switchport access vlan 60
+ switchport port-security mac-address sticky
 !
 interface FastEthernet0/15
+ shutdown
 !
 interface FastEthernet0/16
+ shutdown
 !
 interface FastEthernet0/17
+ shutdown
 !
 interface FastEthernet0/18
+ shutdown
 !
 interface FastEthernet0/19
+ shutdown
 !
 interface FastEthernet0/20
+ shutdown
 !
 interface FastEthernet0/21
+ shutdown
 !
 interface FastEthernet0/22
+ shutdown
 !
 interface FastEthernet0/23
+ shutdown
 !
 interface FastEthernet0/24
+ shutdown
 !
 interface GigabitEthernet0/1
  switchport trunk allowed vlan 10-18,20,30,40,50,60
  switchport trunk native vlan 666
  switchport mode trunk
+ ip dhcp snooping trust
 !
 interface GigabitEthernet0/2
+ shutdown
 !
 interface Vlan1
  no ip address
-!         
+ shutdown
+!
+interface Vlan18
+ ip address 10.1.18.2 255.255.255.0
+!
+ip default-gateway 193.190.120.55
 ip http server
 ip http secure-server
+ip ssh version 2
 !
-!
+!         
 !
 line con 0
+line vty 0 4
+ login local
+ transport input ssh
 line vty 5 15
+ login local
+ transport input ssh
 !
 end

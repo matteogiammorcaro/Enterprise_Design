@@ -1,6 +1,6 @@
-Current configuration : 3342 bytes
+Current configuration : 3380 bytes
 !
-! Last configuration change at 11:38:37 UTC Thu Jan 11 2024
+! Last configuration change at 14:33:49 UTC Thu Jan 11 2024
 !
 version 15.4
 service timestamps debug datetime msec
@@ -60,13 +60,14 @@ license boot module c2900 technology-package securityk9
 !
 !
 username admin password 0 paswoord123
+username cisco password 0 paswoord123
 !
 redundancy
 !
 !
 !
-!
 !         
+!
 ip ssh version 2
 ! 
 !
@@ -112,7 +113,7 @@ interface GigabitEthernet0/1.140
 interface GigabitEthernet0/1.150
  encapsulation dot1Q 150
  ip address 10.2.150.1 255.255.255.0
-!         
+!
 interface GigabitEthernet0/1.160
  encapsulation dot1Q 160
  ip address 10.2.160.1 255.255.255.0
@@ -180,7 +181,7 @@ line 2
 line vty 0 4
  login local
  transport input ssh
-!
+!         
 scheduler allocate 20000 1000
 !
 end

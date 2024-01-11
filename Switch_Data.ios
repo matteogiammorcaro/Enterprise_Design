@@ -1,6 +1,6 @@
-Current configuration : 2973 bytes
+Current configuration : 3758 bytes
 !
-! Last configuration change at 00:40:52 UTC Mon Mar 1 1993
+! Last configuration change at 02:08:30 UTC Mon Mar 1 1993
 !
 version 15.0
 no service pad
@@ -8,17 +8,19 @@ service timestamps debug datetime msec
 service timestamps log datetime msec
 no service password-encryption
 !
-hostname Switch
+hostname Switch-Data
 !
 boot-start-marker
 boot-end-marker
 !
 !
+username cisco privilege 15 secret 5 $1$cXJP$vPC2k.TrrWLmUMAX9ASZq.
 no aaa new-model
 system mtu routing 1500
 !
 !
 no ip domain-lookup
+ip domain-name pingunix.local
 !
 !
 crypto pki trustpoint TP-self-signed-4069838464
@@ -60,66 +62,102 @@ spanning-tree extend system-id
 !
 vlan internal allocation policy ascending
 !
+ip ssh version 2
 !
 !
 !
 !
 !
 interface FastEthernet0/1
+ switchport access vlan 200
+ switchport mode access
 !
 interface FastEthernet0/2
+ switchport access vlan 230
+ switchport mode access
 !
 interface FastEthernet0/3
+ switchport access vlan 240
+ switchport mode access
 !
 interface FastEthernet0/4
+ switchport access vlan 250
+ switchport mode access
 !
 interface FastEthernet0/5
+ switchport access vlan 280
+ switchport mode access
 !
 interface FastEthernet0/6
+ shutdown
 !
 interface FastEthernet0/7
+ shutdown
 !
 interface FastEthernet0/8
+ shutdown
 !
 interface FastEthernet0/9
+ shutdown
 !
 interface FastEthernet0/10
+ shutdown
 !
 interface FastEthernet0/11
+ shutdown
 !
 interface FastEthernet0/12
+ shutdown
 !
 interface FastEthernet0/13
+ shutdown
 !
 interface FastEthernet0/14
+ shutdown
 !
 interface FastEthernet0/15
+ shutdown
 !
 interface FastEthernet0/16
+ shutdown
 !
 interface FastEthernet0/17
+ shutdown
 !
 interface FastEthernet0/18
+ shutdown
 !
 interface FastEthernet0/19
+ shutdown
 !
 interface FastEthernet0/20
+ shutdown
 !
 interface FastEthernet0/21
+ shutdown
 !
 interface FastEthernet0/22
+ shutdown
 !
 interface FastEthernet0/23
+ shutdown
 !
 interface FastEthernet0/24
+ shutdown
 !
 interface GigabitEthernet0/1
+ switchport trunk native vlan 666
+ switchport trunk allowed vlan 200,230,240,250
+ switchport mode trunk
 !
 interface GigabitEthernet0/2
 !
 interface Vlan1
  no ip address
  shutdown
+!
+interface Vlan280
+ ip address 10.3.180.2 255.255.255.0
 !
 ip default-gateway 192.168.1.1
 ip http server
@@ -129,8 +167,10 @@ ip http secure-server
 !
 line con 0
 line vty 0 4
- login
+ login local
+ transport input ssh
 line vty 5 15
- login
+ login local
+ transport input ssh
 !
 end
